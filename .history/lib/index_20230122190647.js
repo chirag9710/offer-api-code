@@ -1,0 +1,16 @@
+const express = require('express')
+const {products} = require("./scraping");
+
+const app = express()
+
+app.get('/', function (req, res) {
+  res.send('Online')
+})
+
+app.get("product/search", async function  (req,res) {
+  query = req.query;
+  data = await products(req.query);
+  res.json(data);
+});
+
+app.listen(3000)
